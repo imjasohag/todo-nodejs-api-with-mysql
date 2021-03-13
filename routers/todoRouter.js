@@ -14,11 +14,9 @@ router.get('/alltodo',(req,res)=>{
                 res.send(response(false, 'todo list', result))
             else res.send(response(false, 'todo list', []))
         }
+    })   
+})//end of all todo
 
-    })
-    
-
-})
 //all todo localhost:2727/todo/filter-todo
 router.get('/filter-todo',(req,res)=>{
     const isDone = req.body.isDone
@@ -31,7 +29,7 @@ router.get('/filter-todo',(req,res)=>{
             else res.send(response(false, 'todo list', []))
         }
     })
-})
+})//end of filter todo
 
 //new todo localhost:2727/todo/newtodo
 router.post('/newtodo', (req, res) => {
@@ -54,18 +52,7 @@ router.post('/newtodo', (req, res) => {
 
     })
 
-})
-//delete todo localhost:2727/todo/:id
-router.delete('/:id', (req, res) => {
-    const id = req.params.id
-    todoModel.deleteTodo(id,(err,result) => {
-        if (err) {
-            res.send(response(true, 'error has found', err))
-        } else {
-            res.send(response(false, 'todo deleted',{id}))
-        }
-    })
-})
+})// end of new todo
 
 //update todo localhost:2727/todo/:id
 router.put('/:id', (req,res) => {
@@ -83,7 +70,19 @@ router.put('/:id', (req,res) => {
         }
     })
 
-})
+})//end of update todo
+
+//delete todo localhost:2727/todo/:id
+router.delete('/:id', (req, res) => {
+    const id = req.params.id
+    todoModel.deleteTodo(id, (err, result) => {
+        if (err) {
+            res.send(response(true, 'error has found', err))
+        } else {
+            res.send(response(false, 'todo deleted', { id }))
+        }
+    })
+}) //end of delete todo
 
 
 module.exports=router
