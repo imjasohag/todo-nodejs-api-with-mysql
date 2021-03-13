@@ -56,9 +56,15 @@ router.post('/newtodo', (req, res) => {
 
 })
 //delete todo localhost:2727/todo/:id
-router.delete('/newtodo', (req, res) => {
-
-
+router.delete('/:id', (req, res) => {
+    const id = req.params.id
+    todoModel.deleteTodo(id,(err,result) => {
+        if (err) {
+            res.send(response(true, 'error has found', err))
+        } else {
+            res.send(response(false, 'todo deleted',{id}))
+        }
+    })
 })
 
 //update todo localhost:2727/todo/:id

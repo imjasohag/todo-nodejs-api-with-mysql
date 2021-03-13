@@ -17,8 +17,9 @@ const todoModel={
         const sql = `UPDATE todos SET ? WHERE id=?`
         db.query(sql,[obj,id],callback)
     },
-    deleteTodo:()=>{
-
+    deleteTodo:(id,callback)=>{
+        const sql = `DELETE FROM todos WHERE id=?`
+        db.query(sql,id,callback)
     }
 
 }
