@@ -1,8 +1,8 @@
-const response=(error,message,data)=>{
+const response=(error,message,obj)=>{
    let res= {
     error,
     message,
-    response:data
+    response:obj
     }
     return res
 

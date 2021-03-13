@@ -62,8 +62,20 @@ router.delete('/newtodo', (req, res) => {
 })
 
 //update todo localhost:2727/todo/:id
-router.put('/newtodo', (req, res) => {
-
+router.put('/:id', (req,res) => {
+    const id=req.params.id
+    const {title,des,isDone}=req.body
+    let obj={}
+    if(title) obj.title=title
+    if(des) obj.des=des
+    if(isDone) obj.isDone=isDone
+    todoModel.updateTodo(id, obj,(err, result)=>{
+        if (err) {
+            res.send(response(true, 'error has found', err))
+        } else {
+            res.send(response(false, 'todo updated', obj))
+        }
+    })
 
 })
 
