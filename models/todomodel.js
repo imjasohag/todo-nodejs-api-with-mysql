@@ -3,7 +3,9 @@ const todoModel={
     allTodo:()=>{
 
     },
-    newTodo:()=>{
+    newTodo:(obj,callback)=>{
+        const sql = `INSERT INTO todos SET ?`
+        db.query(sql,obj,callback)
         
     },
     updateTodo:()=>{

@@ -15,9 +15,20 @@ router.post('/newtodo', (req, res) => {
     const des=req.body.description
     const isdone=req.body.isdone
     const newtodo={
-        title,des,isdone
+        title:title,
+        des:des,
+        isdone:isdone
     }
-    todoModel.newTodo()
+    todoModel.newTodo(newtodo,(err,result)=>{
+        if(err){
+            res.send(response(true,'error has found',err))
+        }else{
+            const id=result.insertId
+            newtodo.id=id
+            res.send(response(false,'todo is added',newtodo))
+        }
+
+    })
 
 })
 //delete todo localhost:2727/todo/:id
