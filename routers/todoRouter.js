@@ -5,8 +5,32 @@ const response = require('../ulits/response')
 
 //all todo localhost:2727/todo/alltodo
 router.get('/alltodo',(req,res)=>{
+
+    todoModel.allTodo((err, result) => {
+        if (err) {
+            res.send(response(true, 'error has found', err))
+        } else {
+            if (result.length > 0)
+                res.send(response(false, 'todo list', result))
+            else res.send(response(false, 'todo list', []))
+        }
+
+    })
     
 
+})
+//all todo localhost:2727/todo/filter-todo
+router.get('/filter-todo',(req,res)=>{
+    const isDone = req.body.isDone
+    todoModel.todoFilter(isDone,(err, result) => {
+        if (err) {
+            res.send(response(true, 'error has found', err))
+        } else {
+            if (result.length > 0)
+                res.send(response(false, 'todo list', result))
+            else res.send(response(false, 'todo list', []))
+        }
+    })
 })
 
 //new todo localhost:2727/todo/newtodo
